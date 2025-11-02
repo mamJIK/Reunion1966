@@ -10,6 +10,18 @@
       margin: 2rem;
       background: #f9f9f9;
     }
+    h1 {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+    h1 img {
+      width: 60px;
+      height: 60px;
+      object-fit: cover;
+      border-radius: 8px;
+    }
     .item {
       background: #fff;
       border-radius: 8px;
@@ -59,15 +71,14 @@
   </style>
 </head>
 <body>
-  <h1 style="display: flex; align-items: center; gap: 1rem;">
-  <img src="https://via.placeholder.com/60x60.png?text=Logo" alt="RBHS Logo" style="border-radius: 8px;">
-  Matric Class of 1966
+  <h1>
+    <img src=https://rondebosch.com/obu/wp-content/uploads/2019/07/footer_09.jpg" alt="RBHS Logo">
+    Matric Class of 1966
   </h1>
   <div id="list">Loading...</div>
 
   <script>
     const jsonUrl = "https://script.google.com/macros/s/AKfycbxhtQNKlcrZSv1mDlvtSAr3baI1VSrFHUIuYyKbOSkOSZV842uu6ikmtI4aMexoxrLfgQ/exec";
-    const placeholderImage = "https://rondebosch.com/obu/wp-content/uploads/2019/07/footer_09.jpg";
 
     function isImageAccessible(url) {
       return new Promise(resolve => {
@@ -89,11 +100,11 @@
           item.className = "item";
 
           const imageUrl = profile["Upload a picture of you here:"] || "";
-          const validImage = imageUrl && await isImageAccessible(imageUrl) ? imageUrl : placeholderImage;
+          const showImage = imageUrl && await isImageAccessible(imageUrl);
 
           item.innerHTML = `
             <div class="profile">
-              <img src="${validImage}" alt="${profile["Your Full Name"]}'s photo">
+              ${showImage ? `<img src="${imageUrl}" alt="${profile["Your Full Name"]}'s photo">` : ""}
               <div class="profile-content">
                 <strong>${profile["Your Full Name"] || "Unnamed"}</strong>
                 <div class="details">
